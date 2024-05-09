@@ -11,6 +11,18 @@ coord_system_start_y = 100
 # to make the rectangles smaller so that the outlines can be seen
 epsilon = 1
 
+def visualize_scheduler(Scheduler_To_Visualize, num_machines, jobs):
+    # calculate makespan
+    scheduler = Scheduler_To_Visualize(num_machines, jobs, CREATE_SCHEDULE=True)
+    makespan = scheduler.schedule()
+    print("makespan:", makespan)
+
+    # create image
+    scheduling_image = Scheduling_Image(num_machines*unit_size + 2*coord_system_start_x, makespan*unit_size + 2*coord_system_start_y)
+    scheduling_image.draw_axes()
+    scheduling_image.draw_border(num_machines)
+    scheduling_image.draw_schedule(scheduler.get_schedule())
+    scheduling_image.create_image()
 
 
 class Scheduling_Image:
@@ -31,7 +43,7 @@ class Scheduling_Image:
 
         # draw marker y
         marker_number = 0
-        for i in range((self.height-200-1)//unit_size,1,-1):
+        for i in range((self.height-200-1)//unit_size,0,-1):
             marker_number +=1
             updated_marker_size = marker_size
             marker_color = "#ffffff"
