@@ -69,10 +69,7 @@ class Scheduling_Image:
 
     def draw_schedule(self, schedule : Schedule):
         placed_jobs  = schedule.placed_jobs
-        num_machines = schedule.num_machines
-        machine_utilization = [0]*num_machines 
-        
-        job_number = 1
+
         for placed_job in placed_jobs:
             indices = placed_job.machine_indices
             job     = placed_job.job

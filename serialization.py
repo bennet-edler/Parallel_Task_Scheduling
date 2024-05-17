@@ -20,3 +20,11 @@ def test_schedulers_and_store_results(Schedulers_To_Test : list, num_machines : 
         job_dictionary = [job.__dict__ for job in jobs]
         json.dump(Instance_With_Results(num_machines, jobs=job_dictionary, results=resulting_makespans).__dict__,
                    out_file, sort_keys=True, indent=4)
+        
+def load_jobs(filepath: str) -> list[Job]:
+    jobs = []
+    with open(filepath, 'r') as in_file:
+        json_jobs = json.load(in_file)['jobs']
+        for job in json_jobs:
+            jobs.append(Job(required_machines=job['required_machines'], execution_time=job['execution_time']))
+    return jobs 
