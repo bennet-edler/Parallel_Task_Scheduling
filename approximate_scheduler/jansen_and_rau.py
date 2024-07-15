@@ -32,7 +32,7 @@ class Jansen_And_Rau_Scheduler(Scheduler):
 
         # place big_jobs (on list scheduler)
         list_scheduler = LIST_Scheduler(self.NUM_MACHINES,big_jobs,CREATE_SCHEDULE=True)
-        list_scheduler.machine_utilization = self.machine_utilization
+        list_scheduler.machine_utilization = list(self.machine_utilization)
         list_scheduler.schedule()
 
         # the point in time, where the last job with required_machines > m/2 ends
@@ -40,17 +40,17 @@ class Jansen_And_Rau_Scheduler(Scheduler):
 
         # the last point in the schedule where two jobs are processed
         T_prime = 0
-        last_job : Placed_Job         = list_scheduler.placed_jobs[-1]
         if len(list_scheduler.placed_jobs) >= 2:
+            last_job : Placed_Job         = list_scheduler.placed_jobs[-1]
             second_last_job : Placed_Job  = list_scheduler.placed_jobs[-2]
 
             T_prime = min(last_job.starting_time + last_job.job.execution_time, 
                           second_last_job.starting_time + second_last_job.job.execution_time)
         elif len(self.placed_jobs) == 1:
+            last_job : Placed_Job         = list_scheduler.placed_jobs[-1]
             T_prime = last_job.starting_time + last_job.job.execution_time
 
         T = max(T_prime, tau_prime) 
-        #print("T: ", T)
 
         # total processing time, where exactly 2 jobs are scheduled
         b = 0

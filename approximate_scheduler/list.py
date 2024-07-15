@@ -9,7 +9,7 @@ class LIST_Scheduler(Scheduler):
     def __init__(self,NUM_MACHINES, jobs, CREATE_SCHEDULE):
         super().__init__(NUM_MACHINES, jobs, CREATE_SCHEDULE)
     
-    def schedule(self):
+    def schedule(self, aligned_right=False):
         # sort jobs by required_machines in decreasing order
         self.jobs.sort(reverse=True, key=attrgetter('required_machines'))
 
@@ -26,7 +26,10 @@ class LIST_Scheduler(Scheduler):
             for j in range(len(jobs_copy)): # TODO: binary search
                 job = jobs_copy[j]
                 if job.required_machines <= gap_size:
-                    needed_indices = available_machine_indices[0:job.required_machines]
+                    if aligned_right:
+                        needed_indices = available_machine_indices[-job.required_machines:]
+                    else:
+                        needed_indices = available_machine_indices[0:job.required_machines]
                     self.place_job(job, needed_indices, start_execution_time=threshold)
                     jobs_copy.pop(j)
                     break
