@@ -5,7 +5,7 @@ from operator import attrgetter
 
 
 # fragmentable
-class LIST_Scheduler(Scheduler):
+class List_Scheduler(Scheduler):
     def __init__(self,NUM_MACHINES, jobs, CREATE_SCHEDULE):
         super().__init__(NUM_MACHINES, jobs, CREATE_SCHEDULE)
     

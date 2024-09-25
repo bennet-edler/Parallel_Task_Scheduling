@@ -33,12 +33,18 @@ class Scheduler:
 
     def generate_random_jobs(
             number_of_jobs, min_execution_time, max_execution_time,
-            min_required_machines, max_required_machines
+            min_required_machines, max_required_machines, float_execution_time=False
             ):
         jobs = []
-        for i in range(1,number_of_jobs+1):
+        for _ in range(1,number_of_jobs+1):
             required_machines = random.randint(min_required_machines,max_required_machines)
-            execution_time = random.randint(min_execution_time,max_execution_time)
+            execution_time = 0
+            if float_execution_time==False:
+                execution_time = random.randint(min_execution_time,max_execution_time)
+            else:
+                execution_time = random.uniform(min_execution_time,max_execution_time)
+                if execution_time == min_execution_time:
+                    execution_time = max_execution_time
             jobs.append(Job(required_machines, execution_time))
         return jobs
 

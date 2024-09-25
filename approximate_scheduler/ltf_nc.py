@@ -2,7 +2,7 @@ from approximate_scheduler.base_scheduler import Scheduler
 from operator import attrgetter
 
 # fragmentable
-class Longest_Task_First_Scheduler_NC(Scheduler):
+class LTF_Scheduler(Scheduler):
     def __init__(self,NUM_MACHINES, jobs, CREATE_SCHEDULE):
         super().__init__(NUM_MACHINES, jobs, CREATE_SCHEDULE)
     

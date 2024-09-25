@@ -1,6 +1,6 @@
 from typedefs import Placed_Job, Job
 from approximate_scheduler.base_scheduler import Scheduler
-from approximate_scheduler.list import LIST_Scheduler
+from approximate_scheduler.list import List_Scheduler
 from operator import attrgetter
 from math import floor
 
@@ -60,8 +60,8 @@ class Tower_Scheduler(Scheduler):
     # let the next one begin where the last one ends in the worst case
     def place_tower(self, tower_interval: Interval):
         # find placing locations for the jobs with machine requirement in tower_interval
-        placing_locations = []
-        location = self.NUM_MACHINES-1
+        placing_locations = [self.NUM_MACHINES-1]
+        location = self.NUM_MACHINES-1 - tower_interval.right * self.NUM_MACHINES
         while(location >= tower_interval.right * self.NUM_MACHINES):
             placing_locations.append(floor(location))
             location -= tower_interval.right * self.NUM_MACHINES
@@ -86,7 +86,7 @@ class Tower_Scheduler(Scheduler):
         job_candidates = self.filter(interval)
 
         # try to schedule all jobs in the interval
-        list_scheduler = LIST_Scheduler(self.NUM_MACHINES, job_candidates, CREATE_SCHEDULE=True)
+        list_scheduler = List_Scheduler(self.NUM_MACHINES, job_candidates, CREATE_SCHEDULE=True)
         list_scheduler.machine_utilization = list(self.machine_utilization)
         list_scheduler.schedule()
         
@@ -142,7 +142,7 @@ class Tower_Scheduler(Scheduler):
     # list-schedule jobs in 'interval'
     def list(self, interval : Interval):
         jobs = self.filter(interval)
-        list_scheduler = LIST_Scheduler(self.NUM_MACHINES, jobs, CREATE_SCHEDULE=self.CREATE_SCHEDULE)
+        list_scheduler = List_Scheduler(self.NUM_MACHINES, jobs, CREATE_SCHEDULE=self.CREATE_SCHEDULE)
         list_scheduler.machine_utilization = list(self.machine_utilization)
         list_scheduler.schedule(aligned_right=True)
         self.placed_jobs = self.placed_jobs + list_scheduler.placed_jobs

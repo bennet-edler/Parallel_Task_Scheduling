@@ -1,12 +1,12 @@
 from typedefs import Placed_Job, Job
 from approximate_scheduler.base_scheduler import Scheduler
 from operator import attrgetter
-from approximate_scheduler.list import LIST_Scheduler
+from approximate_scheduler.list import List_Scheduler
 from typedefs import Placed_Job
 
 
 # fragmentable
-class Jansen_And_Rau_Scheduler(Scheduler):
+class JR_Scheduler(Scheduler):
     def __init__(self,NUM_MACHINES, jobs, CREATE_SCHEDULE):
         super().__init__(NUM_MACHINES, jobs, CREATE_SCHEDULE)
     
@@ -31,7 +31,7 @@ class Jansen_And_Rau_Scheduler(Scheduler):
                 small_jobs.append(job)
 
         # place big_jobs (on list scheduler)
-        list_scheduler = LIST_Scheduler(self.NUM_MACHINES,big_jobs,CREATE_SCHEDULE=True)
+        list_scheduler = List_Scheduler(self.NUM_MACHINES,big_jobs,CREATE_SCHEDULE=True)
         list_scheduler.machine_utilization = list(self.machine_utilization)
         list_scheduler.schedule()
 
@@ -84,7 +84,7 @@ class Jansen_And_Rau_Scheduler(Scheduler):
             self.machine_utilization = list_scheduler.machine_utilization
 
         # place all remaining jobs (small_jobs)
-        list_scheduler = LIST_Scheduler(self.NUM_MACHINES,small_jobs,CREATE_SCHEDULE=self.CREATE_SCHEDULE)
+        list_scheduler = List_Scheduler(self.NUM_MACHINES,small_jobs,CREATE_SCHEDULE=self.CREATE_SCHEDULE)
         list_scheduler.machine_utilization = self.machine_utilization
         list_scheduler.schedule()
 
