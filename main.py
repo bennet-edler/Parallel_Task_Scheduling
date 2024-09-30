@@ -35,7 +35,7 @@ if __name__ == "__main__":
     number_of_test_cases=16
     m=200
 
-    # -------- Generate Figure ---------- #
+    # -------- Generate Figure 3.9 ---------- #
     # code to generate and store the test cases
     """tester = Tester(m=m,n=10,p_min=0,p_max=1,q_min=1,q_max=m)
     for _ in range(number_of_test_cases):
@@ -53,7 +53,7 @@ if __name__ == "__main__":
     Plotter.plot_table(data_list=[plot_data.means for plot_data in plot_data_list], 
                        column_labels=["List_Scheduler","LTF_Scheduler","Shelf_Scheduler", "JR_Scheduler", "Tower_Scheduler"], row_labels=x_values)
     
-    # -------- Generate Figure ---------- #
+    # -------- Generate Figure 3.10 (a) ---------- #
     figure, axis = Plotter.begin_plotting(Schedulers_To_Test,x_label="n", y_label="normalized Makespan", x_scale="log")
     for m, color in [(5,'b'), (10,'g'),(25,'y'),(50,'r'),(500,'k')]:
         # code to generate and store the test cases
@@ -75,7 +75,7 @@ if __name__ == "__main__":
     figure.subplots_adjust(wspace=20)
     plt.show()
 
-    # -------- Generate Figure ---------- #
+    # -------- Generate Figure 3.10 (b) ---------- #
     figure, axis = Plotter.begin_plotting(Schedulers_To_Test,x_label="m", y_label="normalized Makespan", x_scale="log")
     for n, color in [(5,'b'), (10,'g'),(25,'y'),(50,'r'),(500,'k')]:
         # code to generate and store the test cases
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     figure.subplots_adjust(wspace=20)
     plt.show()
     
-    # -------- Generate Figure 3.9  ---------- #
+    # -------- Generate Figure 3.11 (a)  ---------- #
     # code to generate and store the test cases
     """tester = Tester(m=200,n=500,p_min=0,p_max=1,q_min=1,q_max=200)
     for _ in range(number_of_test_cases):
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     x_values = [test_case.x_value for test_case in test_cases]
     Plotter.plot_graph(plot_data_list, x_values, x_label="q_min", y_label="normalized Makespan", x_scale="linear")
 
-    # -------- Generate Figure 3.10 ---------- #
+    # -------- Generate Figure 3.11 (b) ---------- #
     # code to generate and store the test cases
     """tester = Tester(m=200,n=500,p_min=0,p_max=1,q_min=1,q_max=200)
     for _ in range(number_of_test_cases):
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     test_cases = tester.get_test_cases()
     store_test_cases(filepath="test_cases/increasing_q_max.json", test_cases=test_cases)"""
     
-    # code to load the test 3.11 cases
+    # code to load the test cases
     test_cases = load_test_cases("test_cases/increasing_q_max.json")
 
     plot_data_list = Analyzer.analyze_schedulers(Schedulers_To_Test, test_cases, normalized=True)
