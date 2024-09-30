@@ -1,3 +1,4 @@
+test_cases/ filter=lfs diff=lfs merge=lfs -text
 /test_cases/increasing_m_and_n_10.json filter=lfs diff=lfs merge=lfs -text
 /test_cases/increasing_m_and_n_25.json filter=lfs diff=lfs merge=lfs -text
 /test_cases/increasing_m_and_n_5.json filter=lfs diff=lfs merge=lfs -text
