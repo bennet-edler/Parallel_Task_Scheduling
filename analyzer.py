@@ -51,7 +51,6 @@ class Analyzer:
             # execute every test case
             for j in range(len(test_cases)):
                 test_case = test_cases[j]
-                p_max = test_case.p_max
                 makespans = Analyzer.__execute_instances(max_list_makespans, test_case, Scheduler, normalized)
 
                 # store means and deviations

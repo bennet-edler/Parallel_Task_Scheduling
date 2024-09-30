@@ -6,8 +6,8 @@ from approximate_scheduler.jansen_and_rau import JR_Scheduler
 from approximate_scheduler.tower import Tower_Scheduler
 from optimal_scheduler.not_fragmentable import Not_Fragmentable_Scheduler
 from optimal_scheduler.fragmentable import Fragmentable_Scheduler
-from visualization import visualize_scheduler
-from serialization import test_schedulers_and_store_results, load_jobs, store_test_cases, load_test_cases
+#from visualization import visualize_scheduler
+from serialization import store_test_cases, load_test_cases
 from typedefs import Job
 
 from analyzer import Analyzer
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     figure.subplots_adjust(wspace=20)
     plt.show()
     
-    # -------- Generate Figure ---------- #
+    # -------- Generate Figure 3.9  ---------- #
     # code to generate and store the test cases
     """tester = Tester(m=200,n=500,p_min=0,p_max=1,q_min=1,q_max=200)
     for _ in range(number_of_test_cases):
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     x_values = [test_case.x_value for test_case in test_cases]
     Plotter.plot_graph(plot_data_list, x_values, x_label="q_min", y_label="normalized Makespan", x_scale="linear")
 
-    # -------- Generate Figure ---------- #
+    # -------- Generate Figure 3.10 ---------- #
     # code to generate and store the test cases
     """tester = Tester(m=200,n=500,p_min=0,p_max=1,q_min=1,q_max=200)
     for _ in range(number_of_test_cases):
@@ -123,20 +123,13 @@ if __name__ == "__main__":
     test_cases = tester.get_test_cases()
     store_test_cases(filepath="test_cases/increasing_q_max.json", test_cases=test_cases)"""
     
-    # code to load the test cases
+    # code to load the test 3.11 cases
     test_cases = load_test_cases("test_cases/increasing_q_max.json")
 
     plot_data_list = Analyzer.analyze_schedulers(Schedulers_To_Test, test_cases, normalized=True)
     x_values = [test_case.x_value for test_case in test_cases]
     Plotter.plot_graph(plot_data_list, x_values, x_label="q_max", y_label="normalized Makespan", x_scale="linear")
 
-
-
-    # jobs = load_jobs('data.json')
-
-    #jobs = Scheduler.generate_random_jobs(number_of_jobs=200,min_execution_time=1,max_execution_time=10,
-    #                                                min_required_machines=1,max_required_machines=20)
-    #visualize_scheduler(LIST_Scheduler, num_machines=40, jobs=jobs)
 
 
  

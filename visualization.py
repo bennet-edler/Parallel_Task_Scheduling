@@ -11,6 +11,8 @@ coord_system_start_y = 100
 # to make the rectangles smaller so that the outlines can be seen
 epsilon = 1
 
+# requires that jobs have integer exeuction times
+# example usage: visualize_scheduler(LIST_Scheduler, num_machines=40, jobs=jobs)
 def visualize_scheduler(Scheduler_To_Visualize, num_machines, jobs):
     # calculate makespan
     scheduler = Scheduler_To_Visualize(num_machines, jobs, CREATE_SCHEDULE=True)
@@ -89,15 +91,3 @@ class Scheduling_Image:
     def __create_rectangle(self,i,j,w,h):
         return [(coord_system_start_x + i*unit_size+epsilon, self.height - coord_system_start_y -j*unit_size - h*unit_size+epsilon),
             (coord_system_start_x + (i+w)*unit_size-epsilon, self.height - coord_system_start_y -j*unit_size-epsilon)]
-
-
-if __name__ == "__main__":
-    m = 6
-
-    scheduling_image = Scheduling_Image(1920//2, 1080)
-    scheduling_image.draw_axes()
-    scheduling_image.draw_border(m)
-    scheduling_image.create_image()
-
-
-
